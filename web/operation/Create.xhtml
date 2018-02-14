@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Compte:" for="compte" />
+                    <p:selectOneMenu id="compte" value="#{operationControler.selected.compte.id}" >
+                        <f:selectItems value="#{compteControler.items}" var="item" itemValue="#{item.id}" itemLabel="#{item.id}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Type:" for="type" />
+                    <p:selectOneMenu id="type" value="#{operationControler.selected.type}">
+                         <f:selectItem itemValue="1" itemLabel="CREDIT"/>
+                        <f:selectItem itemValue="2" itemLabel="DEBIT"/>
+                       
+                     </p:selectOneMenu>
+                    <p:outputLabel value="Montant:" for="montant" />
+                    <p:inputText id="montant" value="#{operationControler.selected.montant}" title="Montant" />
+                    <p:commandButton action="#{operationControler.save()}" value="OK"></p:commandButton>
+                </p:panelGrid>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+

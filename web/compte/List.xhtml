@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+
+        <h:form id="myForm">
+            <h1><h:outputText value="List des Comptes"/></h1>
+            <p:dataTable value="#{compteControler.items}" var="item" id="dataListCompte">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Solde"/>
+                    </f:facet>
+                    <h:outputText value="#{item.solde}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Id"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Action"/>
+                    </f:facet>
+                    <p:commandLink actionListener="#{compteControler.detail(item)}" value="DETAIL" update=":myForm:oprationDataList"/> <br></br>
+                    <p:commandLink actionListener="#{compteControler.remove(item)}" value="DELETE" update="dataListCompte, :myForm:oprationDataList"/>
+                </p:column>
+            </p:dataTable>
+            <p:commandButton action="Debiter" value="DEBITER"></p:commandButton>><br></br>
+            <p:commandButton action="Create" value="CREER" icon="ui-icon-plus"></p:commandButton>
+            <h1><h:outputText value="List des Operation"/></h1>
+            <p:dataTable id="oprationDataList" value="#{compteControler.selected.operations}" var="item">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Montant"/>
+                    </f:facet>
+                    <h:outputText value="#{item.montant}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Type"/>
+                    </f:facet>
+                    <h:outputText value="#{item.type ==1?'crediter':'debiter'}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Compte"/>
+                    </f:facet>
+                    <h:outputText value="#{item.compte.id}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Id"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
+
